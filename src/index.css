@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Rubik", system-ui, "Segoe UI", sans-serif;
+
+  --color-primary: #4F46E5;
+  --color-primary-hover: #4338CA;
+  --color-primary-light: #EEF2FF;
+  --color-accent: #06B6D4;
+  --color-gradient-from: #4F46E5;
+  --color-gradient-via: #7C3AED;
+  --color-gradient-to: #06B6D4;
+  --color-bg: #F5F7FB;
+  --color-card: #FFFFFF;
+  --color-text: #1E1B4B;
+  --color-muted: #6B7280;
+  --color-border: #E5E7EB;
+}
+
+@layer base {
+  a, button, [role="button"], select, summary, label[for] {
+    @apply cursor-pointer;
+  }
+  a, button {
+    @apply transition duration-200;
+  }
+  button:not(:disabled):active, a:active {
+    @apply scale-[0.97];
+  }
+  button:disabled {
+    @apply cursor-not-allowed;
+  }
+  a:focus-visible, button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
