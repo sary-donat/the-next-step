@@ -17,7 +17,7 @@ const Header = () => {
         queryKey: ['notifications', 'unread-count'],
         queryFn: () => notificationService.getUnreadCount(),
         enabled: isStudent,
-        refetchInterval: 60 * 1000,
+        refetchInterval: 20 * 1000,
     });
     function handleLogout() {
         flushSync(() => logout())
