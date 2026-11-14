@@ -1,32 +1,81 @@
-# React + TypeScript + Vite
+# הצעד הבא — The Next Step
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+מערכת למעקב אחר מועמדויות לעבודה, לתלמידים ולמוסדות לימוד.
+התלמידים מנהלים את המועמדויות שלהם, ומנהלי המוסדות עוקבים אחרי ההתקדמות של התלמידים.
 
-Currently, two official plugins are available:
+זהו צד הלקוח (Frontend) של המערכת. השרת נמצא ב־[hatzad-haba-backend](https://github.com/sary-donat/hatzad-haba-backend).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## תפקידים במערכת
 
-## React Compiler
+| תפקיד | מה אפשר לעשות |
+|---|---|
+| **תלמיד/ה** | הוספה ועריכה של מועמדויות, משימות לכל מועמדות, בחירת תחומי עניין, צפייה בהתראות |
+| **מנהל/ת מוסד** | אישור תלמידים חדשים, צפייה במועמדויות של תלמידי המוסד, ניהול תחומי משרה |
+| **מנהל/ת ראשי/ת** | כל מה שמנהל מוסד יכול, ובנוסף הוספת מוסדות והוספת מנהלים למוסדות |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## טכנולוגיות
 
-## Expanding the Oxlint configuration
+- **React 19** + **TypeScript**, עם **Vite**
+- **React Router** לניווט
+- **TanStack Query** לשליפת נתונים מהשרת
+- **React Hook Form** + **Yup** לטפסים ולבדיקת קלט
+- **Tailwind CSS 4** לעיצוב
+- **Axios** לקריאות לשרת
+- **Lucide** לאייקונים
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## הרצה מקומית
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+צריך Node.js בגרסה 22 ומעלה, ושרת שרץ מקומית (ההוראות במאגר של השרת).
+
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+יוצרים קובץ `.env` בתיקייה הראשית, עם כתובת השרת:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+ומריצים:
+
+```bash
+npm run dev
+```
+
+האתר יעלה בכתובת http://localhost:5173.
+
+## פקודות
+
+| פקודה | מה היא עושה |
+|---|---|
+| `npm run dev` | הרצה בסביבת פיתוח |
+| `npm run build` | בדיקת TypeScript ובניית גרסה להעלאה, לתיקייה `dist` |
+| `npm run preview` | הצגה מקומית של הגרסה הבנויה |
+| `npm run lint` | בדיקת קוד עם Oxlint |
+
+## מבנה התיקיות
+
+```
+src/
+├── api/          # הגדרת Axios והוספת ה־Token לכל בקשה
+├── components/   # קומפוננטות משותפות (כותרת, טפסים, רשימות)
+├── context/      # ניהול ההתחברות (AuthContext)
+├── hooks/        # Hooks לשליפת נתונים עם TanStack Query
+├── pages/        # דפי המערכת
+├── routes/       # הגדרת הנתיבים והגנה לפי תפקיד
+├── services/     # פונקציות הקריאה לשרת
+└── types/        # טיפוסי TypeScript
+```
+
+## העלאה לענן
+
+האתר מוכן להעלאה ל־**Vercel** או ל־**Netlify**:
+
+1. מחברים את המאגר לשירות.
+2. מגדירים משתנה סביבה `VITE_API_URL` עם כתובת השרת בענן, בלי `/api` ובלי `/` בסוף.
+3. מעלים. אם משנים את `VITE_API_URL` אחר כך, צריך להעלות מחדש (Redeploy), כי הערך נכנס לאתר בזמן הבנייה.
+
+הקבצים `vercel.json` ו־`public/_redirects` דואגים שרענון של דף פנימי לא יחזיר 404.
+
+בצד השרת צריך להוסיף את כתובת האתר למשתנה `CORS_ORIGINS`.
