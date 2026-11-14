@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { notificationService } from "../services/notificationsServices"
 import { useState } from "react"
 import { flushSync } from "react-dom"
-import { Bell, Briefcase, Building2, FileText, Home, LogOut, Menu, Sparkles, Tags, Users, X } from "lucide-react"
+import { Bell, Briefcase, Building2, ChevronLeft, FileText, Home, LogOut, Menu, Sparkles, Tags, Users, X } from "lucide-react"
 
 const Header = () => {
     const { user, logout } = useAuth()
@@ -26,11 +26,14 @@ const Header = () => {
     return (
         <header className="sticky top-0 z-40 bg-linear-to-l from-gradient-from via-gradient-via to-gradient-to shadow-lg shadow-primary/20">
             <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-                <Link to={user ? '/home' : '/'} className="flex min-h-11 items-center gap-2 text-lg font-bold text-white sm:text-xl">
+                <Link to={user ? '/home' : '/'} title="לדף הבית" className="group flex min-h-11 items-center gap-2 text-lg font-bold text-white sm:text-xl">
                     <span className="grid size-9 place-items-center rounded-xl bg-white/20 ring-1 ring-white/30">
                         <Sparkles className="size-5" />
                     </span>
                     הצעד הבא
+                    <span className="grid size-6 place-items-center rounded-full bg-white/20 transition group-hover:-translate-x-1 group-hover:bg-white/35">
+                        <ChevronLeft className="size-4" />
+                    </span>
                 </Link>
                 {user ? (<>
                     <nav className="hidden items-center gap-1 lg:flex">
